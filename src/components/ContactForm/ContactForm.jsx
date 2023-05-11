@@ -1,7 +1,5 @@
 import { Component } from "react";
-// import { nanoid } from 'nanoid';
-
-
+import css from 'components/ContactForm/ContactForm.module.css';
 
 export class ContactForm extends Component {
    state = {
@@ -15,29 +13,7 @@ export class ContactForm extends Component {
    };
 
    handleFormSubmit = (e) => {
-            //   console.log(this.props.contacts);
-
       e.preventDefault();
-      // const nameInputValue = e.target.elements.name.value;
-      // console.log(nameInputValue);
-      // if (this.state.name.length === 0) {
-      //    return;
-      // }
-      // this.props.contacts.map(contact => {
-      //    if (contact.name === nameInputValue) {
-      //       alert(`${contact.name} is already in Contacts`)
-      //    }
-      // });
-      // const newContact = {
-      //    name: this.state.name,
-      //    number: this.state.number,
-      //    id: nanoid(),
-      // };
-      // this.setState((prevState) => ({
-      //    contacts: [newContact, ...this.props.contacts],
-      //    name: '',
-      //    number: '',
-      // }));
       this.props.onSubmitData(this.state);
       this.setState({
          name: '',
@@ -46,11 +22,12 @@ export class ContactForm extends Component {
    };
 
    render() {
-            const { number, name } = this.state;
-
+      const { number, name } = this.state;
       return (
-         <form onSubmit={this.handleFormSubmit}>
-               <label>Name 
+         <form
+            className={css.fhonebForm}
+            onSubmit={this.handleFormSubmit}>
+               <label className={css.fhonebFormLabel}>Name 
                <input
             type="text"
             name="name"
@@ -59,9 +36,10 @@ export class ContactForm extends Component {
             required
             value={name}
             onChange={this.handleInputChange}
+            className={css.fhonebFormInpt}
                />
                </label>
-                <label>Number 
+                <label className={css.fhonebFormLabel}>Number 
                <input
             type="tel"
             name="number"
@@ -70,9 +48,10 @@ export class ContactForm extends Component {
             required
             value={number}
             onChange={this.handleInputChange}
+            className={css.fhonebFormInpt}
                />
                </label>
-               <button type="submit">Add contact</button>
+               <button type="submit" className={css.fhonebFormBtn}>Add contact</button>
             </form>)
    }
 
