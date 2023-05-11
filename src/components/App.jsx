@@ -53,7 +53,7 @@ export class App extends Component {
       render() {
          const { filter, contacts } = this.state;
          return (
-            <div>
+            <div className={css.pageWrap}>
                <h1 className={css.pageTitle}>Phonebook</h1>
                <ContactForm
                   onSubmitData={this.formSubmitData}
@@ -62,8 +62,7 @@ export class App extends Component {
                <div className={css.contactsArea}>
                   <Filter value={filter} onChange={this.handleFilterChange} />
                   <ContactList filter={filter} contacts={contacts} onDeleteContact={this.deleteContact} />
-               </div>
-               
+               </div>               
             </div>
          )
       };
