@@ -1,11 +1,10 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import css from 'components/ContactList/ContactList.module.css';
 
 
-export const ContactList = ({ filter, contacts, onDeleteContact }) => {
-   const normalizedFilter = filter.toLowerCase();
-   const filteredNames = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter));
+export const ContactList = ({ filteredNames, onDeleteContact }) => {
+
    return( 
    <ul className={css.contactsList}>
       {filteredNames.map(({ id, name, number }) => (
@@ -20,3 +19,14 @@ export const ContactList = ({ filter, contacts, onDeleteContact }) => {
       ))}
    </ul>)  
 }
+
+ContactList.propTypes = {
+  filteredNames: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }).isRequired
+  ),
+  onDeleteContact: PropTypes.func.isRequired,
+};

@@ -28,7 +28,7 @@ export class App extends Component {
          id: nanoid(),
       };
       const filteredContact = contacts.filter(contact =>
-         contact.name.toLowerCase().includes(newContact.name.toLowerCase())).length;
+         contact.name.toLowerCase() === newContact.name.toLowerCase()).length;
     
       if (filteredContact) {
          return Notify.info(`${name} is already in Contacts`)
@@ -52,6 +52,8 @@ export class App extends Component {
       
       render() {
          const { filter, contacts } = this.state;
+         const filteredNames = contacts.filter(contact =>
+         contact.name.toLowerCase().includes(filter.toLowerCase()));
          return (
             <div className={css.pageWrap}>
                <h1 className={css.pageTitle}>Phonebook</h1>
@@ -61,7 +63,7 @@ export class App extends Component {
                <h2 className={css.title}>Contacts</h2>
                <div className={css.contactsArea}>
                   <Filter value={filter} onChange={this.handleFilterChange} />
-                  <ContactList filter={filter} contacts={contacts} onDeleteContact={this.deleteContact} />
+                  <ContactList filteredNames={filteredNames} filter={filter} contacts={contacts} onDeleteContact={this.deleteContact} />
                </div>               
             </div>
          )
